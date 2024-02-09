@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Tyutor;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,16 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tyutor__groups', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('group');
-            $table->string('adress')->nullable();
-            $table->string('faculty');
-            $table->rememberToken();
+            $table->foreignIdFor(Tyutor::class);
+            $table->foreignIdFor(User::class);
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tyutor__groups');
     }
 };
